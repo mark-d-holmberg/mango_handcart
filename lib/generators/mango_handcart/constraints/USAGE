@@ -1,0 +1,8 @@
+Description:
+    It creates the default Domain Constraints configuration file
+
+Example:
+    rails generate mango_handcart:constraints
+
+    This will create:
+        config/mango_handcart.json

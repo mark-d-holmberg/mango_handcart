@@ -1,0 +1,6 @@
+{
+  "development" : { "domain_constraint" : "dummy.dev" },
+  "test" : { "domain_constraint" : "dummy.test" },
+  "staging" : { "domain_constraint" : "dummy.dev" },
+  "production" : { "domain_constraint" : "dummy.dev" }
+}
