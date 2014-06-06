@@ -3,7 +3,10 @@
 # Setup Mango Handcart Gem here
 MangoHandcart.configure do |config|
 
-  # Setup some_setting for Mango Handcart
-  # config.some_setting = 'some_value'
+  # Setup the domain constraints (Default: [])
+  # config.domain_constraints = ["dummy.dev"]
+
+  # Enable/Disable A-Record domain lookups (Default: false)
+  # config.enable_a_record_lookups = false
 
 end

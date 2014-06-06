@@ -8,9 +8,15 @@ require 'kaminari'
 
 module MangoHandcart
 
+  # The domain constraints for route matching
   mattr_accessor :domain_constraints
   @@domain_constraints = []
 
+  # Do we match on the subdomain AND domain? (A-Records)
+  mattr_accessor :enable_a_record_lookups
+  @@enable_a_record_lookups = false
+
+  # Configure Mango Handcart using a block
   def self.configure
     yield self
   end
