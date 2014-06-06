@@ -1,0 +1,13 @@
+= simple_form_for @dns_record do |f|
+  = f.error_notification
+
+  = f.input :name
+  = f.input :subdomain
+  = f.input :domain
+  = f.input :tld_size
+  = f.input :active, as: :select, include_blank: false
+
+  .form-group
+    .col-sm-offset-2.col-sm-10
+      = f.button :submit, class: 'btn btn-warning'
+      = link_to 'Cancel', @dns_record.new_record? ? dns_records_path : dns_record_path(@dns_record), class: 'btn btn-link'

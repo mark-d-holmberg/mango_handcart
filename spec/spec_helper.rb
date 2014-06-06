@@ -15,7 +15,7 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
-# TOTAL HACKS!
+# TOTAL HACKS
 require 'rails_helper'
 
 RSpec.configure do |config|
@@ -79,4 +79,22 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 =end
+
+  # Don't use transactions
+  config.use_transactional_fixtures = false
+
+  # Database cleaner
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with(:truncation)
+  end
+  config.before(:each) do
+    DatabaseCleaner.start
+  end
+  config.after(:each) do
+    DatabaseCleaner.clean
+  end
+
+  # Factory Girl
+  config.include FactoryGirl::Syntax::Methods
 end

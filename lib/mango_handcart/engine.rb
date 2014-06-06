@@ -5,9 +5,9 @@ module MangoHandcart
       g.hidden_namespaces << :test_unit << :erb
       g.test_framework :rspec, fixture: false, view_specs: false
       g.integration_tool :rspec
-      # g.fixture_replacement :factory_girl, dir: 'spec/factories'
-      # g.template_engine :haml
-      # g.stylesheet_engine :scss
+      g.fixture_replacement :factory_girl, dir: 'spec/factories'
+      g.template_engine :haml
+      g.stylesheet_engine :scss
       g.assets false
       g.helper false
     end

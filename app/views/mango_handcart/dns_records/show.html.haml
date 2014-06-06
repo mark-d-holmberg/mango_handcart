@@ -1,0 +1,31 @@
+- title t(".title", dns_record: @dns_record.name), false
+
+.page-header
+  %h3.sub-title.inline
+    = t(".title", dns_record: @dns_record.name)
+    %span
+      = link_to edit_dns_record_path(@dns_record), class: 'btn btn-warning btn-xs', title: t(".edit_dns_record") do
+        %span.glyphicon.glyphicon-edit
+
+%table.table.table-striped.table-hover.table-condensed
+  %tbody
+    %tr
+      %th= MangoHandcart::DnsRecord.human_attribute_name(:name)
+      %td= @dns_record.name
+      %th= MangoHandcart::DnsRecord.human_attribute_name(:subdomain)
+      %td= @dns_record.subdomain
+    %tr
+      %th= MangoHandcart::DnsRecord.human_attribute_name(:domain)
+      %td= @dns_record.domain
+      %th= MangoHandcart::DnsRecord.human_attribute_name(:tld_size)
+      %td= @dns_record.tld_size
+    %tr
+      %th= MangoHandcart::DnsRecord.human_attribute_name(:active)
+      %td= @dns_record.active? ? "Active" : "Inactive"
+      %th
+      %td
+    %tr
+      %th Created At
+      %td= l(@dns_record.created_at, format: :short)
+      %th Updated At
+      %td= l(@dns_record.updated_at, format: :short)

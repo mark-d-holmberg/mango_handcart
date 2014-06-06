@@ -1,0 +1,47 @@
+en:
+  date:
+    formats:
+      short: "%d %B %Y"
+  time:
+    formats:
+      short: "%d %b %Y,%l:%M %P"
+      only_time: "%l:%M %P"
+      only_date: "%d %B %Y"
+  activerecord:
+    attributes:
+      created_at: 'Created'
+      updated_at: 'Updated'
+      mango_handcart/dns_record:
+        name: 'Name'
+        subdomain: 'Subdomain'
+        domain: 'Domain'
+        tld_size: 'Top Level Domain Size'
+        active: 'Active'
+    models:
+      mango_handcart/dns_record: 'DNS Record'
+  layouts:
+    mango_handcart:
+      navbar:
+        main_app: 'Dummy'
+        dns_records: 'DNS Records'
+      application:
+        mango_handcart_brand: 'Mango Handcart'
+        copyright: "Mango Handcart %{year}"
+        default_title: 'Mango Handcart'
+        default_sub_title: ''
+        title: "Mango Handcart : %{title}"
+  mango_handcart:
+    dns_records:
+      edit:
+        title: "Edit DNS Record"
+      index:
+        confirm: 'Are you sure you want to remove this DNS Record?'
+        edit_dns_record: "Edit DNS Record"
+        new_dns_record: "New DNS Record"
+        remove_dns_record: "Remove DNS Record"
+        dns_records: "DNS Records"
+      new:
+        title: 'New DNS Record'
+      show:
+        edit_dns_record: "Edit DNS Record"
+        title: "DNS Record : %{dns_record}"

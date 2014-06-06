@@ -20,7 +20,14 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   s.add_dependency "rails", "~> 4.1.1"
+  s.add_dependency "haml-rails"
+  s.add_dependency 'jquery-rails'
+  s.add_dependency 'bootstrap-sass', '~> 3.1.1'
+  s.add_dependency "simple_form", "~> 3.0.2"
+  s.add_dependency 'kaminari'
 
   s.add_development_dependency "pg"
   s.add_development_dependency "rspec-rails"
+  s.add_development_dependency 'factory_girl_rails'
+  s.add_development_dependency "database_cleaner"
 end
