@@ -16,6 +16,10 @@ module MangoHandcart
   mattr_accessor :enable_a_record_lookups
   @@enable_a_record_lookups = false
 
+  # The subdomains which cannot be assigned to a DNS record
+  mattr_accessor :reserved_subdomains
+  @@reserved_subdomains = []
+
   # Configure Mango Handcart using a block
   def self.configure
     yield self

@@ -11,11 +11,50 @@ module MangoHandcart
       it "requires a name" do
         expect(build(:mango_handcart_dns_record, name: nil)).to_not be_valid
       end
+
+      it "should require a unique subdomain" do
+        expect(create(:mango_handcart_dns_record, subdomain: 'mark')).to be_valid
+        expect(build(:mango_handcart_dns_record, subdomain: 'mark')).to_not be_valid
+      end
+
+      it "should require a unique subdomain regardless of case" do
+        expect(create(:mango_handcart_dns_record, subdomain: 'mark')).to be_valid
+        expect(build(:mango_handcart_dns_record, subdomain: 'MARK')).to_not be_valid
+      end
+
+      it "should not be valid if the subdomain is reserved" do
+        MangoHandcart.reserved_subdomains.each do |reserved_sub_domain|
+          expect(build(:mango_handcart_dns_record, subdomain: reserved_sub_domain)).to_not be_valid
+        end
+      end
+    end
+
+    describe "concerning invalid characters" do
+      it "should remove spaces in the subdomain" do
+        expect(create(:mango_handcart_dns_record, subdomain: 'this has spaces').subdomain).to eq("thishasspaces")
+        expect(create(:mango_handcart_dns_record, subdomain: 'this    has s p   aces').subdomain).to eq("thishasspaces")
+      end
+
+      it "should remove the '+'' character" do
+        expect(create(:mango_handcart_dns_record, subdomain: 'this has a + in it').subdomain).to eq("thishasainit")
+      end
+
+      it "should remove the '/' character" do
+        expect(create(:mango_handcart_dns_record, subdomain: 'this has a / in it').subdomain).to eq("thishasainit")
+      end
+
+      it "should remove the '=' character" do
+        expect(create(:mango_handcart_dns_record, subdomain: 'this has a = in it').subdomain).to eq("thishasainit")
+      end
+
+      it "should remove the '?' character" do
+        expect(create(:mango_handcart_dns_record, subdomain: 'this has a ? in it').subdomain).to eq("thishasainit")
+      end
     end
 
     describe "concerning reserved subdomains" do
       it "can list the reserved subdomains" do
-        skip "implement me"
+        expect(MangoHandcart.reserved_subdomains).to eq(["www", "ftp", "ssh", "pop3", "dev", "master", "customer", "reseller", "admin"])
       end
     end
 

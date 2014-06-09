@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
 
-  mount MangoHandcart::Engine => "/mango_handcart"
+  # Only allow managing Mango Handcart from the master "end"
+  constraints(subdomain: /master/) do
+    mount MangoHandcart::Engine => "/mango_handcart"
+  end
 
   # The default domain constraint configures what should match
   # when all the other routes fail to match other namespaces
