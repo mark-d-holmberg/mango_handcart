@@ -1,0 +1,25 @@
+%h1 Listing ip_addresses
+
+%table
+  %tr
+    %th Address
+    %th Subnet mask
+    %th Handcart
+    %th Blacklisted
+    %th
+    %th
+    %th
+
+  - @ip_addresses.each do |ip_address|
+    %tr
+      %td= ip_address.address
+      %td= ip_address.subnet_mask
+      %td= ip_address.handcart
+      %td= ip_address.blacklisted
+      %td= link_to 'Show', ip_address
+      %td= link_to 'Edit', edit_ip_address_path(ip_address)
+      %td= link_to 'Destroy', ip_address, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Ip address', new_ip_address_path

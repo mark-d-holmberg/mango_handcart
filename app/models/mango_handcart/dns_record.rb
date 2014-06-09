@@ -1,5 +1,6 @@
 module MangoHandcart
   class DnsRecord < ActiveRecord::Base
+    has_one :handcart, class_name: MangoHandcart.handcart_class.to_s
 
     validates :name, presence: true
 

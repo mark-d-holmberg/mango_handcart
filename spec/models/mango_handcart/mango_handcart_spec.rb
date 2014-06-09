@@ -22,6 +22,10 @@ module MangoHandcart
       it "should have an attribute for a-record lookups" do
         expect(MangoHandcart.enable_a_record_lookups).to eql(false)
       end
+
+      it "should know the handcart_class" do
+        expect(MangoHandcart.handcart_class).to eq(Company)
+      end
     end
   end
 

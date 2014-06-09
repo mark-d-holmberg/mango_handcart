@@ -12,4 +12,8 @@ MangoHandcart.configure do |config|
   # The list of subdomains which cannot be assigned to a DNS record
   # config.reserved_subdomains = ["www", "ftp", "ssh", "pop3", "dev", "master", "customer", "reseller", "admin"]
 
+  # This MUST be set in order for Mango Handcart to work properly.
+  # Set it to the value of the class which will call `acts_as_handcart`
+  # config.handcart_class = "Company"
+
 end

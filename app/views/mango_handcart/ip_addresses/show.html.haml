@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Address:
+  = @ip_address.address
+%p
+  %b Subnet mask:
+  = @ip_address.subnet_mask
+%p
+  %b Handcart:
+  = @ip_address.handcart
+%p
+  %b Blacklisted:
+  = @ip_address.blacklisted
+
+= link_to 'Edit', edit_ip_address_path(@ip_address)
+\|
+= link_to 'Back', ip_addresses_path
