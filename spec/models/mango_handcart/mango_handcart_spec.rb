@@ -26,6 +26,10 @@ module MangoHandcart
       it "should know the handcart_class" do
         expect(MangoHandcart.handcart_class).to eq(Company)
       end
+
+      it "knows the handcart_show_path" do
+        expect(MangoHandcart.handcart_show_path).to be_nil
+      end
     end
   end
 

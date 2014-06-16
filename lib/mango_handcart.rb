@@ -21,9 +21,15 @@ module MangoHandcart
   mattr_accessor :reserved_subdomains
   @@reserved_subdomains = []
 
+  # Which class will invoke a call to `acts_as_handcart`
   mattr_accessor :handcart_class
   @@handcart_class = nil
 
+  # What view_path can I use to view the handcart?
+  mattr_accessor :handcart_show_path
+  @@handcart_show_path = nil
+
+  # What class is used for the Subdomain/Domain matching?
   mattr_accessor :dns_record_class
   @@dns_record_class = "MangoHandcart::DnsRecord"
 

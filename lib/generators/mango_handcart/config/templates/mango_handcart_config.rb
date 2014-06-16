@@ -16,4 +16,7 @@ MangoHandcart.configure do |config|
   # Set it to the value of the class which will call `acts_as_handcart`
   # config.handcart_class = "Company"
 
+  # Set this to change where the handcart show route is
+  # config.handcart_show_path = "companies"
+
 end

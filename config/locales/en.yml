@@ -11,6 +11,10 @@ en:
     attributes:
       created_at: 'Created'
       updated_at: 'Updated'
+      mango_handcart/ip_address:
+        address: 'Address'
+        blacklisted: 'Blacklisted'
+        subnet_mask: 'Subnet Mask'
       mango_handcart/dns_record:
         name: 'Name'
         subdomain: 'Subdomain'
@@ -19,11 +23,13 @@ en:
         active: 'Active'
     models:
       mango_handcart/dns_record: 'DNS Record'
+      mango_handcart/ip_address: 'IP Address'
   layouts:
     mango_handcart:
       navbar:
         main_app: 'Dummy'
         dns_records: 'DNS Records'
+        ip_addresses: 'IP Addresses'
       application:
         mango_handcart_brand: 'Mango Handcart'
         copyright: "Mango Handcart %{year}"
@@ -31,6 +37,21 @@ en:
         default_sub_title: ''
         title: "Mango Handcart : %{title}"
   mango_handcart:
+    ip_addresses:
+      edit:
+        title: "Edit IP Address"
+      index:
+        confirm: 'Are you sure you want to remove this IP Address?'
+        edit_ip_address: 'Edit IP Address'
+        new_ip_address: 'New IP Address'
+        remove_ip_address: 'Remove IP Address'
+        title: "IP Addresses"
+        view_ip_address: 'View IP Address'
+      new:
+        title: "New IP Address"
+      show:
+        edit_ip_address: 'Edit IP Address'
+        title: "IP Address : %{address}"
     dns_records:
       edit:
         title: "Edit DNS Record"

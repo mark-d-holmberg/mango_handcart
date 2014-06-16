@@ -1,25 +1,37 @@
-%h1 Listing ip_addresses
+- title t(".title")
 
-%table
-  %tr
-    %th Address
-    %th Subnet mask
-    %th Handcart
-    %th Blacklisted
-    %th
-    %th
-    %th
+- content_for(:toolbar) do
+  .btn-group
+    = link_to new_ip_address_path, class: 'btn btn-primary btn-xs', title: t(".new_ip_address") do
+      %span.glyphicon.glyphicon-plus
 
-  - @ip_addresses.each do |ip_address|
+= paginate @ip_addresses
+
+%table.table.table-striped.table-hover.table-condensed
+  %thead
     %tr
-      %td= ip_address.address
-      %td= ip_address.subnet_mask
-      %td= ip_address.handcart
-      %td= ip_address.blacklisted
-      %td= link_to 'Show', ip_address
-      %td= link_to 'Edit', edit_ip_address_path(ip_address)
-      %td= link_to 'Destroy', ip_address, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      %th= MangoHandcart::IpAddress.human_attribute_name(:address)
+      %th= MangoHandcart::IpAddress.human_attribute_name(:subnet_mask)
+      %th= MangoHandcart::IpAddress.human_attribute_name(:handcart)
+      %th= MangoHandcart::IpAddress.human_attribute_name(:blacklisted)
+      %th
+      %th
+  %tbody
+    - @ip_addresses.each do |ip_address|
+      %tr
+        %td= link_to ip_address.address, ip_address, title: t(".view_ip_address")
+        %td= ip_address.subnet_mask
+        %td
+          - if ip_address.handcart.present?
+            = link_to ip_address.handcart.to_s, MangoHandcart.handcart_class.handcart_show_path(ip_address.handcart)
+          - else
+            None
+        %td= ip_address.blacklisted? ? "Yes" : "No"
+        %td.action-button
+          = link_to edit_ip_address_path(ip_address), class: 'btn btn-xs btn-warning', title: t(".edit_ip_address") do
+            %span.glyphicon.glyphicon-edit
+        %td.action-button
+          = link_to ip_address, method: :delete, data: { confirm: t(".confirm") }, class: 'btn btn-danger btn-xs', title: t(".remove_ip_address") do
+            %span.glyphicon.glyphicon-remove
 
-%br
-
-= link_to 'New Ip address', new_ip_address_path
+= paginate @ip_addresses

@@ -20,18 +20,18 @@ module MangoHandcart
     end
 
     def create
-      @dns_record = DnsRecord.new(dns_record_params)
+      @dns_record = DnsRecord.new(safe_params)
 
       if @dns_record.save
-        redirect_to @dns_record, notice: 'Dns record was successfully created.'
+        redirect_to @dns_record, notice: 'DNS Record was successfully created.'
       else
         render :new
       end
     end
 
     def update
-      if @dns_record.update(dns_record_params)
-        redirect_to @dns_record, notice: 'Dns record was successfully updated.'
+      if @dns_record.update(safe_params)
+        redirect_to @dns_record, notice: 'DNS Record was successfully updated.'
       else
         render :edit
       end
@@ -39,8 +39,9 @@ module MangoHandcart
 
     def destroy
       @dns_record.destroy
-      redirect_to dns_records_url, notice: 'Dns record was successfully destroyed.'
+      redirect_to dns_records_url, notice: 'DNS Record was successfully removed.'
     end
+
 
     private
 
@@ -48,8 +49,9 @@ module MangoHandcart
       @dns_record = DnsRecord.find(params[:id])
     end
 
-    def dns_record_params
-      params.require(:dns_record).permit(:name, :subdomain, :domain, :tld_size, :active)
+    def safe_params
+      safe_attributes = [:name, :subdomain, :domain, :tld_size, :active]
+      params.require(:dns_record).permit(safe_attributes)
     end
 
   end

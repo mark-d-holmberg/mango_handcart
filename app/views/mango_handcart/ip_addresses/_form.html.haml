@@ -1,22 +1,12 @@
-= form_for @ip_address do |f|
-  - if @ip_address.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@ip_address.errors.count, "error")} prohibited this ip_address from being saved:"
-      %ul
-        - @ip_address.errors.full_messages.each do |msg|
-          %li= msg
+= simple_form_for @ip_address do |f|
+  = f.error_notification
 
-  .field
-    = f.label :address
-    = f.text_field :address
-  .field
-    = f.label :subnet_mask
-    = f.text_field :subnet_mask
-  .field
-    = f.label :handcart
-    = f.text_field :handcart
-  .field
-    = f.label :blacklisted
-    = f.check_box :blacklisted
-  .actions
-    = f.submit 'Save'
+  = f.input :address
+  = f.input :subnet_mask
+  = f.association :handcart, collection: MangoHandcart.handcart_class.all, label: MangoHandcart.handcart_class.model_name.human
+  = f.input :blacklisted, as: :select, include_blank: false
+
+  .form-group
+    .col-sm-offset-2.col-sm-10
+      = f.button :submit, class: 'btn btn-warning'
+      = link_to 'Cancel', @ip_address.new_record? ? ip_addresses_path : ip_address_path(@ip_address), class: 'btn btn-link'

@@ -1,18 +1,38 @@
-%p#notice= notice
+- title t(".title", address: @ip_address.address), false
 
-%p
-  %b Address:
-  = @ip_address.address
-%p
-  %b Subnet mask:
-  = @ip_address.subnet_mask
-%p
-  %b Handcart:
-  = @ip_address.handcart
-%p
-  %b Blacklisted:
-  = @ip_address.blacklisted
+.page-header
+  %h3.sub-title.inline
+    = t(".title", address: @ip_address.address)
+    %span
+      = link_to edit_ip_address_path(@ip_address), class: 'btn btn-warning btn-xs', title: t(".edit_ip_address") do
+        %span.glyphicon.glyphicon-edit
 
-= link_to 'Edit', edit_ip_address_path(@ip_address)
-\|
-= link_to 'Back', ip_addresses_path
+.row
+  .col-lg-3.well
+    %table.table.table-striped.table-condensed.table-hover.no-margin-bottom
+      %tbody
+        %tr
+          %th= MangoHandcart::IpAddress.human_attribute_name(:address)
+          %td= @ip_address.address
+        %tr
+          %th= MangoHandcart::IpAddress.human_attribute_name(:subnet_mask)
+          %td= @ip_address.subnet_mask
+        %tr
+          %th= MangoHandcart::IpAddress.human_attribute_name(:handcart)
+          %td
+            - if @ip_address.handcart.present?
+              = link_to @ip_address.handcart.to_s, MangoHandcart.handcart_class.handcart_show_path(@ip_address.handcart)
+            - else
+              None
+        %tr
+          %th= MangoHandcart::IpAddress.human_attribute_name(:blacklisted)
+          %td= @ip_address.blacklisted? ? "Yes" : "No"
+        %tr
+          %th Created At
+          %td= l(@ip_address.created_at, format: :short)
+        %tr
+          %th Updated At
+          %td= l(@ip_address.updated_at, format: :short)
+
+  .col-lg-9
+    Other stuff here
