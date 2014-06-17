@@ -22,8 +22,12 @@
     %tr
       %th= MangoHandcart::DnsRecord.human_attribute_name(:active)
       %td= @dns_record.active? ? "Active" : "Inactive"
-      %th
+      %th= MangoHandcart.handcart_class.model_name.human
       %td
+        - if @dns_record.handcart
+          = link_to @dns_record.handcart.try(:to_s), MangoHandcart.handcart_class.handcart_show_path(@dns_record.handcart)
+        - else
+          None
     %tr
       %th Created At
       %td= l(@dns_record.created_at, format: :short)

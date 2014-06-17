@@ -1,0 +1,35 @@
+- title "Companies", false
+
+.page-header
+  %h3.sub-title.inline
+    Companies
+    %span
+      = link_to new_company_path, class: 'btn btn-primary btn-xs', title: 'New Company' do
+        %span.glyphicon.glyphicon-plus
+
+= paginate @companies
+
+%table.table.table-striped.table-hover.table-condensed#companies_index
+  %thead
+    %tr
+      %th= Company.human_attribute_name(:name)
+      %th= Company.human_attribute_name(:dns_record)
+      %th= Company.human_attribute_name(:active)
+      %th
+      %th
+  %tbody
+    - @companies.each do |company|
+      %tr
+        %td= link_to company.name, company
+        %td
+          - if company.dns_record
+            = link_to company.dns_record.name, mango_handcart.dns_record_path(company.dns_record)
+          - else
+            None
+        %td= company.active? ? "Yes" : "No"
+        %td.action-button
+          = link_to edit_company_path(company), class: 'btn btn-warning btn-xs', title: "Edit Company" do
+            %span.glyphicon.glyphicon-edit
+        %td.action-button
+          = link_to company, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-xs', title: "Remove Company" do
+            %span.glyphicon.glyphicon-remove

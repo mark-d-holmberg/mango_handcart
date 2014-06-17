@@ -1,0 +1,11 @@
+= simple_form_for @company do |f|
+  = f.error_notification
+
+  = f.input :name
+  = f.association :dns_record, collection: f.object.new_record? ? MangoHandcart::DnsRecord.unallocated : MangoHandcart::DnsRecord.unallocated_or_current(@company)
+  = f.input :active, as: :select, include_blank: false
+
+  .form-group
+    .col-sm-offset-2.col-sm-10
+      = f.button :submit, class: 'btn btn-warning'
+      = link_to 'Cancel', companies_path, class: 'btn btn-link'

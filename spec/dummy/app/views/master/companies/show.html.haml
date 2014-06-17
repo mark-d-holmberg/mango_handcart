@@ -1,0 +1,21 @@
+- title "Company : #{@company.to_s}"
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th= Company.human_attribute_name(:name)
+      %th= Company.human_attribute_name(:dns_record)
+      %th= Company.human_attribute_name(:active)
+      %th
+  %tbody
+    %tr
+      %td= @company.name
+      %td
+        - if @company.dns_record.present?
+          = link_to @company.dns_record.name, mango_handcart.dns_record_path(@company.dns_record)
+        - else
+          None
+      %td= @company.active? ? "Yes" : "No"
+      %td.action-button
+        = link_to edit_company_path(@company), class: 'btn btn-warning btn-xs', title: "Edit Company" do
+          %span.glyphicon.glyphicon-edit
