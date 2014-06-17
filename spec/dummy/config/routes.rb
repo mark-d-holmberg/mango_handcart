@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   end
 
   constraints(MangoHandcart::DnsRecord) do
-    # resources :custom_constraints, only: [:index], constraints: MangoHandcart::SettingConstraint.new(:enables?, :custom_constraints)
+    resources :custom_constraints, only: [:index], constraints: MangoHandcart::SettingConstraint.new(:enables?, :custom_constraints)
     # resources :ip_addresses, only: [:index]
     match '/', to: 'franchisee#index', via: [:get], as: :franchisee_root
   end

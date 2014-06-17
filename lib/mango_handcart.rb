@@ -1,8 +1,9 @@
 require "mango_handcart/engine"
 require "mango_handcart/domain_constraint"
-require 'haml'
-require "mango_handcart/simple_form"
+require "mango_handcart/setting_constraint"
 require "mango_handcart/acts_as_handcart"
+require "mango_handcart/simple_form"
+require 'haml'
 require 'jquery-rails'
 require 'bootstrap-sass'
 require 'kaminari'

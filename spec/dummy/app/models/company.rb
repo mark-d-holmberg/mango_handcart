@@ -3,6 +3,7 @@ class Company < ActiveRecord::Base
 
   scope :ordered, -> { order("companies.name ASC") }
 
+
   def to_s
     name
   end
