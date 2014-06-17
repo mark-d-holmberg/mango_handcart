@@ -1,0 +1,14 @@
+- title "IP Addresses"
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th= MangoHandcart::IpAddress.human_attribute_name(:address)
+      %th= MangoHandcart::IpAddress.human_attribute_name(:subnet_mask)
+      %th= MangoHandcart::IpAddress.human_attribute_name(:blacklisted)
+  %tbody
+    - @ip_addresses.each do |ip_address|
+      %tr
+        %td= ip_address.address
+        %td= ip_address.subnet_mask
+        %td= ip_address.blacklisted? ? "Yes" : "No"
