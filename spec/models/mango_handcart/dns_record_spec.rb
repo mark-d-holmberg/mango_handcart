@@ -109,5 +109,77 @@ module MangoHandcart
       end
     end
 
+    describe "concerning associations" do
+      it "should have one company" do
+        dns_record = create(:mango_handcart_dns_record, subdomain: 'mark')
+        company = create(:company, dns_record: dns_record)
+        expect(dns_record.handcart).to eq(company)
+      end
+    end
+
+    describe "concerning scopes" do
+      it 'should have an allocated scope' do
+        dns_record = create(:mango_handcart_dns_record, subdomain: 'mark')
+        company = create(:company, dns_record: dns_record)
+        expect(DnsRecord.allocated).to match_array([dns_record])
+      end
+
+      it "should have an unallocated scope" do
+        dns_record = create(:mango_handcart_dns_record, subdomain: 'mark')
+        expect(dns_record.handcart).to be_nil
+        expect(DnsRecord.unallocated).to match_array([dns_record])
+      end
+
+      it "should have an unallocated or current scope" do
+        unallocated = create(:mango_handcart_dns_record, subdomain: 'mark')
+        current = create(:mango_handcart_dns_record, subdomain: 'holmberg')
+        company = create(:company, dns_record: current)
+        expect(unallocated.handcart).to be_nil
+        expect(current.handcart).to_not be_nil
+        expected = DnsRecord.unallocated_or_current(company)
+        expect(DnsRecord.unallocated_or_current(company)).to match_array([current, unallocated])
+      end
+    end
+
+    describe "concerning activation of handcarts" do
+      describe "concerning handcarts that dont respond_to :active?" do
+        before(:each) do
+          @dns_record = create(:mango_handcart_dns_record, subdomain: 'example')
+          @company = create(:company, dns_record: @dns_record, active: true)
+          @request = ActionController::TestRequest.new
+          @request.host = "example.dummy.dev"
+          allow(@company).to receive(:active?).and_return(true)
+        end
+
+        it "should return true if the handcart doesnt respond_to :active?" do
+          expect(DnsRecord.matches?(@request)).to eq(true)
+          expect(@company).to respond_to(:active?)
+        end
+      end
+
+      describe "concering handcarts that do respond_to :active?" do
+        before(:each) do
+          @dns_record = create(:mango_handcart_dns_record, subdomain: 'example')
+          @company = create(:company, dns_record: @dns_record)
+          @request = ActionController::TestRequest.new
+          @request.host = "example.dummy.dev"
+        end
+
+        it "should return true if it is active" do
+          allow(@company).to receive(:active?).and_return(true)
+          expect(@company).to respond_to(:active?)
+          expect(@company.active?).to eq(true)
+          expect(DnsRecord.matches?(@request)).to eq(true)
+        end
+
+        it "should return false if it is NOT active" do
+          @company.update(active: false)
+          expect(@company).to respond_to(:active?)
+          expect(@company.active?).to eq(false)
+          expect(DnsRecord.matches?(@request)).to eq(false)
+        end
+      end
+    end
+
   end
 end

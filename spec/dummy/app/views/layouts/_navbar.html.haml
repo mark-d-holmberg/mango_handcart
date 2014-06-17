@@ -1,0 +1,12 @@
+#navbar-collapse-1.collapse.navbar-collapse
+  %ul.nav.navbar-nav
+    %li
+      = link_to '#' do
+        %span.glyphicon.glyphicon-home
+        Link 1
+    -# unless (MangoHandcart.ip_authorization.ip_authorization_strategy == :none)
+      %li{class: (params[:controller] == "ip_addresses") ? "active" : nil}
+        = link_to main_app.ip_addresses_path do
+          %span.glyphicon.glyphicon-screenshot
+          My IP Addresses
+

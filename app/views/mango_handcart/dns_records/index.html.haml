@@ -12,6 +12,7 @@
     %tr
       %th= MangoHandcart::DnsRecord.human_attribute_name(:name)
       %th= MangoHandcart::DnsRecord.human_attribute_name(:subdomain)
+      %th= MangoHandcart.handcart_class.model_name.human
       %th= MangoHandcart::DnsRecord.human_attribute_name(:domain)
       %th= MangoHandcart::DnsRecord.human_attribute_name(:tld_size)
       %th= MangoHandcart::DnsRecord.human_attribute_name(:active)
@@ -22,6 +23,11 @@
       %tr
         %td= link_to dns_record.name, dns_record
         %td= dns_record.subdomain
+        %td
+          - if dns_record.handcart
+            = link_to dns_record.handcart.try(:to_s), MangoHandcart.handcart_class.handcart_show_path(dns_record.handcart)
+          - else
+            None
         %td= dns_record.domain
         %td= dns_record.tld_size
         %td= dns_record.active? ? "Active" : "Inactive"
