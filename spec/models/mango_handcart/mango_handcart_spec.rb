@@ -42,5 +42,15 @@ module MangoHandcart
       end
     end
 
+    describe "concerning IP Forwarding and Blocking" do
+      it "should know the global_ip_blocking_enabled_environments" do
+        expect(MangoHandcart.global_ip_blocking_enabled_environments).to match_array(["development", "staging", "production"])
+      end
+
+      it "should know the global_ip_forwarding_enabled_environments" do
+        expect(MangoHandcart.global_ip_forwarding_enabled_environments).to match_array(["development", "staging", "production"])
+      end
+    end
+
   end
 end

@@ -22,4 +22,10 @@ MangoHandcart.configure do |config|
   # Set the strategy to use for IP Authorization
   config.ip_authorization_strategy = :inclusion
 
+  # What Rails environments enable IP blocking and blacklisting
+  config.global_ip_blocking_enabled_environments = ["development", "staging", "production"]
+
+  # What Rails environments enable IP forwarding and forbidden redirects
+  config.global_ip_forwarding_enabled_environments = ["development", "staging", "production"]
+
 end

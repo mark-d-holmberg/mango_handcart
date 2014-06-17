@@ -1,6 +1,6 @@
 class FranchiseeController < ApplicationController
 
-  # enable_blocking("public#blocked")
+  enable_blocking("public#blocked")
 
   def index
   end

@@ -12,13 +12,15 @@ Rails.application.routes.draw do
 
   constraints(MangoHandcart::DnsRecord) do
     resources :custom_constraints, only: [:index], constraints: MangoHandcart::SettingConstraint.new(:enables?, :custom_constraints)
-    # resources :ip_addresses, only: [:index]
+    resources :ip_addresses, only: [:index]
     match '/', to: 'franchisee#index', via: [:get], as: :franchisee_root
   end
 
   # The default domain constraint configures what should match
   # when all the other routes fail to match other namespaces
   constraints MangoHandcart::DomainConstraint.default_constraint do
+    match '/forbidden', to: 'public#forbidden', as: :public_forbidden, via: [:get]
+    match '/blocked', to: 'public#blocked', as: :public_blocked, via: [:get]
     root to: 'public#index'
   end
 

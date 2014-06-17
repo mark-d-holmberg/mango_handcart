@@ -24,32 +24,16 @@
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
-          %a.navbar-brand{href: master_root_path}
-            %span.glyphicon.glyphicon-heart
-            Master Dummy Backend
-        = render "layouts/master/navbar"
+          %a.navbar-brand{href: root_url} Public Dummy Frontend
 
     .container
       .row
-        - if content_for?(:sidebar)
-          .col-lg-9
-            %div.flash-message
-              = bootstrap_flash
-            - if content_for?(:sub_title)
-              .page-header
-                %h3.sub-title.inline= content_for?(:sub_title) ? yield(:sub_title) : t('.default_sub_title')
-            %div= yield
-          .col-lg-3
-            .well.sidebar-nav
-              %ul.nav.nav-list= yield(:sidebar)
-        - else
-          .col-lg-12
-            %div.flash-message
-              = bootstrap_flash
-            - if content_for?(:sub_title)
-              .page-header
-                %h3.sub-title.inline= content_for?(:sub_title) ? yield(:sub_title) : t('.default_sub_title')
-            %div= yield
+        .col-lg-12
+          %div.flash-message= bootstrap_flash
+          - if content_for?(:sub_title)
+            .page-header
+              %h3.sub-title.inline= content_for?(:sub_title) ? yield(:sub_title) : t('.default_sub_title')
+          %div= yield
 
       %footer
         %p &copy; MangoHandcart #{Date.today.year}

@@ -3,6 +3,7 @@ require "mango_handcart/domain_constraint"
 require "mango_handcart/setting_constraint"
 require "mango_handcart/acts_as_handcart"
 require "mango_handcart/ip_authorization"
+require 'mango_handcart/controller_additions'
 require "mango_handcart/simple_form"
 require 'haml'
 require 'jquery-rails'
@@ -44,6 +45,14 @@ module MangoHandcart
   # What strategy are they using for IP Forwarding/Blocking
   mattr_accessor :ip_authorization_strategy
   @@ip_authorization_strategy = nil
+
+  # Enable Global IP Forwarding for certain environments
+  mattr_accessor :global_ip_forwarding_enabled_environments
+  @@global_ip_forwarding_enabled_environments = []
+
+  # Enable Gobal IP Blocking for certain environments
+  mattr_accessor :global_ip_blocking_enabled_environments
+  @@global_ip_blocking_enabled_environments = []
 
   # Configure Mango Handcart using a block
   def self.configure
