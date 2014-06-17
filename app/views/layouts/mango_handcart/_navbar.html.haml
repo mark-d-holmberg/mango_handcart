@@ -9,7 +9,8 @@
       = link_to mango_handcart.root_path do
         %span.glyphicon.glyphicon-th-list
         = t(".dns_records")
-    %li{class: (params[:controller] == "mango_handcart/ip_addresses") ? "active" : nil}
-      = link_to mango_handcart.ip_addresses_path do
-        %span.glyphicon.glyphicon-screenshot
-        = t(".ip_addresses")
+    - unless (MangoHandcart.ip_authorization.ip_authorization_strategy == :none)
+      %li{class: (params[:controller] == "mango_handcart/ip_addresses") ? "active" : nil}
+        = link_to mango_handcart.ip_addresses_path do
+          %span.glyphicon.glyphicon-screenshot
+          = t(".ip_addresses")

@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 module MangoHandcart
-
   describe MangoHandcart do
 
     describe "concerning the default domain constraint" do
@@ -31,6 +30,17 @@ module MangoHandcart
         expect(MangoHandcart.handcart_show_path).to be_nil
       end
     end
-  end
 
+    describe "concerning IP Authorization" do
+      it "should not enforce IP Authorization by default" do
+        expect(MangoHandcart.ip_authorization_strategy).to_not be_nil
+        expect(MangoHandcart.ip_authorization_strategy).to eq(:inclusion)
+      end
+
+      it "should have an IP Authorization singleton" do
+        expect(MangoHandcart.ip_authorization).to_not be_nil
+      end
+    end
+
+  end
 end

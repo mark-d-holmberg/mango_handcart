@@ -19,4 +19,7 @@ MangoHandcart.configure do |config|
   # Set this to change where the handcart show route is
   # config.handcart_show_path = "companies"
 
+  # Set the strategy to use for IP Authorization
+  config.ip_authorization_strategy = :inclusion
+
 end

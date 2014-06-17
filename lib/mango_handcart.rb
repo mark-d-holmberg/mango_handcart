@@ -2,6 +2,7 @@ require "mango_handcart/engine"
 require "mango_handcart/domain_constraint"
 require "mango_handcart/setting_constraint"
 require "mango_handcart/acts_as_handcart"
+require "mango_handcart/ip_authorization"
 require "mango_handcart/simple_form"
 require 'haml'
 require 'jquery-rails'
@@ -9,6 +10,12 @@ require 'bootstrap-sass'
 require 'kaminari'
 
 module MangoHandcart
+  module Strategies
+    # Load the IP Authorization strategies
+    autoload :BaseIpStrategy, "mango_handcart/strategies/base_ip_strategy"
+    autoload :InclusionStrategy, 'mango_handcart/strategies/inclusion_strategy'
+    autoload :ContainmentStrategy, 'mango_handcart/strategies/containment_strategy'
+  end
 
   # The domain constraints for route matching
   mattr_accessor :domain_constraints
@@ -34,6 +41,10 @@ module MangoHandcart
   mattr_accessor :dns_record_class
   @@dns_record_class = "MangoHandcart::DnsRecord"
 
+  # What strategy are they using for IP Forwarding/Blocking
+  mattr_accessor :ip_authorization_strategy
+  @@ip_authorization_strategy = nil
+
   # Configure Mango Handcart using a block
   def self.configure
     yield self
@@ -45,6 +56,10 @@ module MangoHandcart
 
   def self.dns_record_class
     @@dns_record_class.constantize
+  end
+
+  def self.ip_authorization
+    IpAuthorization.instance
   end
 
 end

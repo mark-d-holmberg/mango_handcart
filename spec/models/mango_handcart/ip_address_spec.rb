@@ -1,4 +1,4 @@
-require 'rails_helper'
+require 'spec_helper'
 
 module MangoHandcart
   RSpec.describe IpAddress, type: :model do
