@@ -64,7 +64,7 @@ MangoHandcart provides the ability to configure advanced routing constraints. Th
 routes only if certain conditions are met. See the following example:
 
 ```ruby
-  constraints(MangoHandcart::Subdomain) do
+  constraints(MangoHandcart::DnsRecord) do
     resources :custom_constraints, only: [:index], constraints: MangoHandcart::SettingConstraint.new(:enables?, :custom_constraints)
     match '/', to: 'franchisee#index', via: [:get], as: :franchisee_root
   end
@@ -137,7 +137,7 @@ Rails.application.routes.draw do
   end
 
   # Allows for Subdomains created through MangoHandcart (Franchisee Interface)
-  constraints(MangoHandcart::Subdomain) do
+  constraints(MangoHandcart::DnsRecord) do
     match '/', to: 'franchisee#index', via: [:get], as: :franchisee_root
   end
 
